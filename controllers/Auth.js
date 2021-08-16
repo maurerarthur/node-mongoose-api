@@ -8,12 +8,8 @@ const User = require('../models/User.model')
 module.exports = {
     async signup(req, res) {
         try {
-            const newUser = new User(req.body)
-            await newUser.save()
-            return res.status(200).json({
-                message: 'User successfully registered',
-                user: newUser
-            })
+            const user = await User.create(req.body)
+            return res.status(200).json({ message: 'User successfully registered', user })
         } catch(e) {
             return res.status(400).json({
                 message: 'There was an error registering the user'
