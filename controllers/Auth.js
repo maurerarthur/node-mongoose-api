@@ -11,9 +11,7 @@ module.exports = {
             const user = await User.create(req.body)
             return res.status(200).json({ message: 'User successfully registered', user })
         } catch(e) {
-            return res.status(400).json({
-                message: 'There was an error registering the user'
-            })
+            return res.status(400).json({ message: 'There was an error registering the user' })
         }
     },
 
