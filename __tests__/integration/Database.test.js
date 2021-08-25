@@ -1,4 +1,4 @@
-const { mongoose } = require('../../database/mongoose')
+const { mongoose } = require('../../src/database/mongoose')
 
 describe('Database', function() {
     it('Database should successfully connect', async function() {

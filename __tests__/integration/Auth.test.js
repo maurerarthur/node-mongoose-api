@@ -1,14 +1,8 @@
 const bcrypt = require('bcrypt')
 
-const { mongoose } = require('../../database/mongoose')
+const User = require('../../src/models/User.model')
 
-const User = require('../../models/User.model')
-
-const userMock = {
-    name: 'Test User',
-    email: 'test@user.com',
-    password: '12345'
-}
+const userMock = require('../mocks/User').User
 
 describe('Authentication', function() {
     it('User should successfully register', async function() {
@@ -18,6 +12,14 @@ describe('Authentication', function() {
         //The password will be hashed, so in order to this test to pass the password needs to be reassigned
 
         expect(user).toEqual(userMock)
+    })
+
+    it('User should not register because the email is already taken', async function() {
+        const { email } = await User.findOne({ email: userMock.email })
+
+        if(email) {
+            expect(email).toBeTruthy()
+        }
     })
 
     it('User should successfully log in', async function() {

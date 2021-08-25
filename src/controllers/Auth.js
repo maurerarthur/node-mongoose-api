@@ -8,8 +8,8 @@ const User = require('../models/User.model')
 module.exports = {
     async signup(req, res) {
         try {
-            const user = await User.create(req.body)
-            return res.status(200).json({ message: 'User successfully registered', user })
+            const { _id, name, email } = await User.create(req.body)
+            return res.status(200).json({ message: 'User successfully registered', _id, name, email })
         } catch(e) {
             return res.status(400).json({ message: 'There was an error registering the user' })
         }
@@ -35,25 +35,5 @@ module.exports = {
         }
 
         return res.status(400).json({ message: 'User not found' })
-    },
-
-    async jwt(req, res, next) {
-        const token = req.headers.authorization
-
-        if(!token) {
-            return res.status(401).json({ message: 'No JWT token was found in the request header' })
-        }
-
-        try {
-            const decoded = jwt.decode(token, process.env.JWT_SECRET)
-
-            if(decoded) {
-                return next()
-            } else {
-                return res.status(401).json({ message: 'JWT token is invalid' })
-            }
-        } catch(e) {
-            return res.status(401).json({ message: 'Error on authentication' })
-        }
     }
 }
