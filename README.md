@@ -1,4 +1,4 @@
-# Node.js with Express, Mongoose and JWT authentication flow
+# Node.js with Jest automated tests
 Boilerplate code to a complete JWT authentication flow with Express, Mongoose, and automated tests with Jest
 
 # .env
