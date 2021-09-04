@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const User = require('../../src/models/User.model')
 
 const userMock = require('../mocks/User').User
+const emptyUserMock = require('../mocks/User').EmptyUser
 
 describe('Authentication', function() {
     it('User should successfully register', async function() {
