@@ -15,6 +15,18 @@ describe('Authentication', function() {
         expect(user).toEqual(userMock)
     })
 
+    it('User should not register', async function() {
+        let isUserValid
+
+        try {
+            isUserValid = await User.create(emptyUserMock)
+        } catch(e) {
+            isUserValid = false
+        }
+
+        expect(isUserValid).toBeFalsy()
+    })
+
     it('User should not register because the email is already taken', async function() {
         const { email } = await User.findOne({ email: userMock.email })
 
